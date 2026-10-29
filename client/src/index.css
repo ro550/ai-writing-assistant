@@ -1,0 +1,77 @@
+/* client/src/index.css
+   Global reset and design tokens. Replaces the default Vite stylesheet. */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+:root {
+  /* Warm blue palette */
+  --blue-900: #162a5c;
+  --blue-700: #1f4bb0;
+  --blue-600: #2f63d6;
+  --blue-500: #4f7fe6;
+  --blue-100: #e3ebfc;
+  --blue-50: #f1f5fd;
+
+  --amber-300: #f6c47a;
+  --amber-100: #fdeed6;
+
+  --ink: #1b2742;
+  --ink-soft: #55627f;
+  --line: #d6dff2;
+  --surface: #ffffff;
+  --paper: #fffdfa;
+
+  --danger: #b2402e;
+  --danger-bg: #fdeceb;
+
+  --font-ui: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-text: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --shadow-card: 0 1px 2px rgba(22, 42, 92, 0.06), 0 6px 18px rgba(22, 42, 92, 0.06);
+
+  color-scheme: light;
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--blue-50);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: block; /* undo Vite's centered flex body */
+  background-color: var(--blue-50);
+  /* a faint amber glow in the top corner keeps the blue from feeling cold */
+  background-image: radial-gradient(900px 380px at 90% -8%, var(--amber-100), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+}
