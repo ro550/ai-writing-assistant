@@ -21,6 +21,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Log every request
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    console.log(
+      `${new Date().toISOString()} ${req.method} ${req.originalUrl} ${res.statusCode} ${Date.now() - start}ms`
+    );
+  });
+  next();
+});
+
 // Define allowed input values and limits for API requests.
 const VALID_TYPES = ['blog', 'email', 'social'];
 const VALID_TONES = ['formal', 'casual', 'persuasive'];
@@ -170,6 +181,8 @@ app.post('/api/generate', async (req, res) => {
     insertMessage.run(conversationId, 'user', userPrompt);
     insertMessage.run(conversationId, 'assistant', response.text);
 
+    console.log(`Generated ${contentType}/${tone}/${length} via ${response.provider} (${response.usage?.total || 0} tokens)`);
+
     res.json({
       content: response.text,
       conversationId,
@@ -234,6 +247,8 @@ The user is refining content you previously wrote. Apply their feedback and retu
     // Persist the new messages only after the AI response succeeds.
     insertMessage.run(conversationId, 'user', cleanMessage);
     insertMessage.run(conversationId, 'assistant', response.text);
+
+    console.log(`Generated ${contentType}/${tone}/${length} via ${response.provider} (${response.usage?.total || 0} tokens)`);
 
     res.json({
       content: response.text,
